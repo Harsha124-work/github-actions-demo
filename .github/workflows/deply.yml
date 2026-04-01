@@ -39,7 +39,7 @@ jobs:
 
           script: |
             if [ ! -d "github-actions-demo" ]; then
-              git clone https://github.com/<your-username>/<repo-name>.git
+              git clone https://github.com/Harsha124-work/github-actions-demo.git
             fi
 
             cd github-actions-demo
