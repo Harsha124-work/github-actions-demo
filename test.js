@@ -5,3 +5,4 @@ if (getMessage() !== "Hello from GitHub Actions 🚀") {
 }
 
 console.log("Test passed ✅");
+process.exit(0);
