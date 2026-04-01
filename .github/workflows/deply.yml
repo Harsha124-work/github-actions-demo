@@ -19,7 +19,7 @@ jobs:
           key: ${{ secrets.EC2_KEY }}
 
           script: |
-            cd github-actions-demo || git clone <your-repo-url>
+            cd github-actions-demo || git clone https://github.com/Harsha124-work/github-actions-demo.git 
             cd github-actions-demo
             git pull origin main
             npm install
