@@ -1,4 +1,4 @@
-name: Deploy Node App
+name: CI/CD Pipeline
 
 on:
   push:
@@ -6,20 +6,42 @@ on:
       - main
 
 jobs:
+
+  build-and-test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Install Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 18
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Run tests
+        run: npm test
+
   deploy:
+    needs: build-and-test   # 👈 IMPORTANT
     runs-on: ubuntu-latest
 
     steps:
       - name: Deploy to EC2
         uses: appleboy/ssh-action@v1
-
         with:
           host: ${{ secrets.EC2_HOST }}
           username: ${{ secrets.EC2_USER }}
           key: ${{ secrets.EC2_KEY }}
 
           script: |
-            cd github-actions-demo || git clone https://github.com/Harsha124-work/github-actions-demo.git 
+            if [ ! -d "github-actions-demo" ]; then
+              git clone https://github.com/<your-username>/<repo-name>.git
+            fi
+
             cd github-actions-demo
             git pull origin main
             npm install

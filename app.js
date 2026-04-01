@@ -1,9 +1,13 @@
+function getMessage() {
+  return "Hello from GitHub Actions 🚀";
+}
+
+module.exports = { getMessage };
+
 const http = require('http');
 
 const server = http.createServer((req, res) => {
-  res.end("Updated via GitHub Actions 🚀🔥");
+  res.end(getMessage());
 });
 
-server.listen(3000, () => {
-  console.log("Server running on port 3000");
-});
+server.listen(3000);
